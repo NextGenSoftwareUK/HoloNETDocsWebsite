@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Changelog — HOLONET DOCS</title>
-<meta name="description" content="HoloNET API 4.5.0. Everything else is unchanged.">
+<meta name="description" content="HoloNET Client and HyperNET 4.5.0, API 4.5.1, HDK 4.5.0. ORM and Manager are unchanged.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./assets/css/style.css">
@@ -62,12 +62,34 @@
       <div class="breadcrumb"><a href="/">HOLONET DOCS</a><span class="breadcrumb-sep">/</span><span>Resources</span></div>
       <div class="page-meta"><span class="badge badge-reference">Changelog</span><span class="badge badge-version">HoloNET 4.x · Holochain 0.7.0 / 0.7.1</span></div>
       <h1 class="page-title">Changelog</h1>
-      <p class="page-desc">HoloNET API 4.5.0. Everything else is unchanged.</p>
+      <p class="page-desc">HoloNET Client and HyperNET 4.5.0, API 4.5.1, HDK 4.5.0. ORM and Manager are unchanged.</p>
     </div>
     <div class="content">
 
-<h2 id="v450-2026-10-16">v4.5.0 - 2026-10-16</h2>
+<h2 id="v451-2026-10-31">v4.5.1 - 2026-10-31</h2>
 
+<ul>
+<li><strong>Examples.</strong> <a href="/examples"><code>examples/</code></a> has six runnable, commented examples:</li>
+<li>the Client;</li>
+<li>the ORM;</li>
+<li>every HoloNET API feature;</li>
+<li>HyperNET (three players);</li>
+<li>hApp generation, including a WEB5 STAR OAPP;</li>
+<li>a live web site on Holochain.</li>
+</ul>
+<p>All six run against Holochain 0.7.0 and 0.7.1 in the release tests (<code>scripts/run-live-tests.sh</code>, <code>PROJECTS=examples</code>).
+  <code>examples/start-conductor.sh</code> and <code>.ps1</code> start a conductor from HoloNET's bundled binaries.
+- <strong>Documentation sites:</strong>
+  - <a href="https://docs.holonet.oasisomniverse.one">docs.holonet.oasisomniverse.one</a> has every guide and the full API reference;
+  - <a href="https://learn.holonet.oasisomniverse.one">learn.holonet.oasisomniverse.one</a> has six step-by-step tutorials.</p>
+<p>Both are generated from the Markdown in this repo (<code>scripts/build-sites.py</code>).
+- <strong>Client.</strong> The app client that <code>InstallEnableSignAttachAndConnectToHappAsync</code> creates now inherits the admin client's
+  logging settings. It always logged to the console and to file with the defaults, whatever you had set.
+- <strong>HoloNET API.</strong> <code>Configure(holoNETDNA)</code> and <code>UseConductor(adminUri, logToConsole)</code> set the conductor and logging in one line.
+- <strong>HyperNET.</strong> <code>HyperNETSession.AgentPubKey</code> is your own key, which other players need to message or ping you.
+- <strong>Tests.</strong> The generated-hApp test now skips, saying why, when the generated sources are missing.</p>
+<h2 id="v450-2026-10-16">v4.5.0 - 2026-10-16</h2>
+<p>HoloNET API 4.5.0. Everything else is unchanged.</p>
 <ul>
 <li><strong>Per-key storage.</strong> Each key is its own entry, so saving or loading one key costs the same however big the store is.
   <code>SaveAllDataAsync</code> writes only what changed, and keys removed from <code>Data</code> are deleted. A store saved by 4.4.2 or earlier
@@ -656,6 +678,7 @@ at tag <code>holochain-0.6.1</code> on GitHub) so HoloNET's serialization actual
     <div class="rail-title">On this page</div>
     <nav class="rail-nav">
       <a href="#changelog">Changelog</a>
+      <a href="#v451-2026-10-31">v4.5.1 - 2026-10-31</a>
       <a href="#v450-2026-10-16">v4.5.0 - 2026-10-16</a>
       <a href="#v442-2026-10-16">v4.4.2 - 2026-10-16</a>
       <a href="#v441-2026-10-16">v4.4.1 - 2026-10-16</a>

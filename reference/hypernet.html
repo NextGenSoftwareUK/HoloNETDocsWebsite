@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HyperNET API reference — HOLONET DOCS</title>
-<meta name="description" content="Generated from NextGenSoftware.Holochain.HoloNET.HyperNET 4.4.0.0 (every public type and member, with its XML documentation where it has one). For guides and examples see the documentation index.">
+<meta name="description" content="Generated from NextGenSoftware.Holochain.HoloNET.HyperNET 4.5.0.0 (every public type and member, with its XML documentation where it has one). For guides and examples see the documentation index.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/style.css">
@@ -62,7 +62,7 @@
       <div class="breadcrumb"><a href="/">HOLONET DOCS</a><span class="breadcrumb-sep">/</span><span>API reference</span></div>
       <div class="page-meta"><span class="badge badge-reference">Reference</span><span class="badge badge-version">HoloNET 4.x · Holochain 0.7.0 / 0.7.1</span></div>
       <h1 class="page-title">HyperNET API reference</h1>
-      <p class="page-desc">Generated from <code>NextGenSoftware.Holochain.HoloNET.HyperNET</code> 4.4.0.0 (every public type and member, with its XML documentation where it has one). For guides and examples see the <a href="../README.md">documentation index</a>.</p>
+      <p class="page-desc">Generated from <code>NextGenSoftware.Holochain.HoloNET.HyperNET</code> 4.5.0.0 (every public type and member, with its XML documentation where it has one). For guides and examples see the <a href="../README.md">documentation index</a>.</p>
     </div>
     <div class="content">
 
@@ -477,6 +477,11 @@
 <td><code>HyperNETSession(IHoloNETClientAppAgent client, string zone, string playerName, HyperNETOptions options = null)</code></td>
 <td>ctor</td>
 <td>A session for one player (one connected app agent) in a zone. Call JoinAsync to enter it.</td>
+</tr>
+<tr>
+<td><code>string AgentPubKey { get; }</code></td>
+<td>property</td>
+<td>Your agent public key: what other players pass to SendAsync(..., HyperNETTarget.Specific, agentPubKeys) and PingAsync to reach you.</td>
 </tr>
 <tr>
 <td><code>bool IsJoined { get; }</code></td>

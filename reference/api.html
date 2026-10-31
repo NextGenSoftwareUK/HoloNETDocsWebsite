@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HoloNET API reference — HOLONET DOCS</title>
-<meta name="description" content="Generated from NextGenSoftware.Holochain.HoloNET.API 4.5.0.0 (every public type and member, with its XML documentation where it has one). For guides and examples see the documentation index.">
+<meta name="description" content="Generated from NextGenSoftware.Holochain.HoloNET.API 4.5.1.0 (every public type and member, with its XML documentation where it has one). For guides and examples see the documentation index.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/style.css">
@@ -62,7 +62,7 @@
       <div class="breadcrumb"><a href="/">HOLONET DOCS</a><span class="breadcrumb-sep">/</span><span>API reference</span></div>
       <div class="page-meta"><span class="badge badge-reference">Reference</span><span class="badge badge-version">HoloNET 4.x · Holochain 0.7.0 / 0.7.1</span></div>
       <h1 class="page-title">HoloNET API reference</h1>
-      <p class="page-desc">Generated from <code>NextGenSoftware.Holochain.HoloNET.API</code> 4.5.0.0 (every public type and member, with its XML documentation where it has one). For guides and examples see the <a href="../README.md">documentation index</a>.</p>
+      <p class="page-desc">Generated from <code>NextGenSoftware.Holochain.HoloNET.API</code> 4.5.1.0 (every public type and member, with its XML documentation where it has one). For guides and examples see the <a href="../README.md">documentation index</a>.</p>
     </div>
     <div class="content">
 
@@ -143,6 +143,11 @@
 <td><code>EventHandler&lt;HoloNETAPISignalEventArgs&gt; OnSignalReceived</code></td>
 <td>event</td>
 <td>Raised when another agent sends this agent a message with SendSignalAsync: (sender's agent pub key, message).</td>
+</tr>
+<tr>
+<td><code>static void Configure(HoloNETDNA holoNETDNA)</code></td>
+<td>method</td>
+<td>Set the HoloNET settings the API uses: which conductor (HolochainConductorAdminURI, or HolochainConductorMode = UseEmbedded with an .Embedded package), whether HoloNET starts / stops it, and logging (LogToConsole, LogToFile...). Call before the first API call (or after ShutdownAsync); the app connection the API makes inherits the same logging.</td>
 </tr>
 <tr>
 <td><code>static Task&lt;HoloNETAPIResult&lt;bool&gt;&gt; DeleteAllDataAsync(string zome = "oasis", string loadFunction = "get_avatar_by_id", string createFunction = "create_entry_avatar", string updateFunction = "update_entry_avatar")</code></td>
@@ -478,6 +483,11 @@
 <td><code>static Task&lt;HoloNETAPIResult&lt;bool&gt;&gt; UnsubscribeFromChangesAsync(string ns)</code></td>
 <td>method</td>
 <td>Stop getting OnDataChanged for this namespace.</td>
+</tr>
+<tr>
+<td><code>static void UseConductor(string adminUri, bool logToConsole = true)</code></td>
+<td>method</td>
+<td>Use a conductor you run yourself (HoloNET won't start or stop it), optionally without console logging.</td>
 </tr>
 </tbody>
 </table></div>
