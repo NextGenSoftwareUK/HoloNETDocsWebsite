@@ -1,0 +1,10 @@
+{
+  "name": "holonet-docs-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HOLONET DOCS \u2014 docs.holonet.oasisomniverse.one (generated from holochain-client-csharp)",
+  "scripts": {
+    "dev": "npx serve . -p 3003",
+    "build": "echo 'Static site - no build step required'"
+  }
+}
