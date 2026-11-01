@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Getting started — HOLONET DOCS</title>
-<meta name="description" content="Use one Client/ORM variant per app. They have the same API and namespaces; only the bundled conductor differs.">
+<meta name="description" content="Fastest way: start from a template. dotnet new install NextGenSoftware.Holochain.HoloNET.Templates, then dotnet new holonet-console -n MyApp (or holonet-blazor, holonet-wpf, holonet-maui, ...) gives you a project that already runs. See Templates and the 5-minute tutorial. The rest of this page is for adding HoloNET to an app you already have.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./assets/css/style.css">
@@ -28,6 +28,8 @@
       <div class="nav-section-title">Overview</div>
       <a class="nav-item" href="/">HoloNET Documentation</a>
       <a class="nav-item active" href="/getting-started">Getting started</a>
+      <a class="nav-item" href="/templates">Project templates</a>
+      <a class="nav-item" href="/packages">Packages</a>
       <a class="nav-item" href="/examples">Examples</a>
       <div class="nav-section-title">Guides</div>
       <a class="nav-item" href="/client-guide">HoloNET Client</a>
@@ -46,6 +48,7 @@
       <a class="nav-item" href="/changelog">Changelog</a>
       <div class="nav-section-title">More</div>
       <a class="nav-item" href="https://learn.holonet.oasisomniverse.one" target="_blank">Tutorials ↗</a>
+      <a class="nav-item" href="https://sandbox.holonet.oasisomniverse.one" target="_blank">Sandbox ↗</a>
       <a class="nav-item" href="https://github.com/holochain-open-dev/holochain-client-csharp/tree/main/examples" target="_blank">Examples on GitHub ↗</a>
       <a class="nav-item" href="https://github.com/holochain-open-dev/holochain-client-csharp" target="_blank">GitHub ↗</a>
     </nav>
@@ -62,9 +65,10 @@
       <div class="breadcrumb"><a href="/">HOLONET DOCS</a><span class="breadcrumb-sep">/</span><span>Overview</span></div>
       <div class="page-meta"><span class="badge badge-reference">Guide</span><span class="badge badge-version">HoloNET 4.x · Holochain 0.7.0 / 0.7.1</span></div>
       <h1 class="page-title">Getting started</h1>
-      <p class="page-desc">Use one Client/ORM variant per app. They have the same API and namespaces; only the bundled conductor differs.</p>
+      <p class="page-desc"><strong>Fastest way:</strong> start from a template. <code>dotnet new install NextGenSoftware.Holochain.HoloNET.Templates</code>, then <code>dotnet new holonet-console -n MyApp</code> (or <code>holonet-blazor</code>, <code>holonet-wpf</code>, <code>holonet-maui</code>, ...) gives you a project that already runs. See <a href="templates.md">Templates</a> and the <a href="https://learn.holonet.oasisomniverse.one/tutorials/00-up-and-running-in-5-minutes">5-minute tutorial</a>. The rest of this page is for adding HoloNET to an app you already have.</p>
     </div>
     <div class="content">
+
 
 <h2 id="1-pick-a-package">1. Pick a package</h2>
 <div class="table-wrap"><table>
@@ -100,14 +104,14 @@
 <td><code>NextGenSoftware.Holochain.HoloNET.HyperNET</code></td>
 </tr>
 <tr>
-<td>Everything in one reference (Client, ORM, HyperNET, WEB5 STAR, HoloOASIS)</td>
+<td>Everything in one reference (Client, ORM, HyperNET)</td>
 <td><code>NextGenSoftware.Holochain.HoloNET.HDK</code></td>
 </tr>
 </tbody>
 </table></div>
 <div class="code-block"><div class="code-block-header"><span class="code-lang">bash</span><button class="copy-btn">Copy</button></div><pre>dotnet add package NextGenSoftware.Holochain.HoloNET.Client.Embedded
 </pre></div>
-
+<p>Use one variant per app. They have the same API and namespaces; only the bundled conductor differs. Every library comes in the same four variants (none, <code>.Embedded</code>, <code>.Embedded.Holochain071</code>, <code>.Embedded.Holochain070</code>); see <a href="/packages">Packages</a> for the full list. The bundled conductors are Windows programs: on other systems use the package with no suffix and run your own conductor.</p>
 <h2 id="2-which-holochain-version">2. Which Holochain version?</h2>
 <p>Both are supported and tested on every release.</p>
 <ul>
