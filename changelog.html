@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Changelog — HOLONET DOCS</title>
-<meta name="description" content="HoloNET Client and HyperNET 4.5.0, API 4.5.1, HDK 4.5.0. ORM and Manager are unchanged.">
+<meta name="description" content="Every HoloNET package is now released together at one version, in four conductor variants, with project templates.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./assets/css/style.css">
@@ -65,12 +65,32 @@
       <div class="breadcrumb"><a href="/">HOLONET DOCS</a><span class="breadcrumb-sep">/</span><span>Resources</span></div>
       <div class="page-meta"><span class="badge badge-reference">Changelog</span><span class="badge badge-version">HoloNET 4.x · Holochain 0.7.0 / 0.7.1</span></div>
       <h1 class="page-title">Changelog</h1>
-      <p class="page-desc">HoloNET Client and HyperNET 4.5.0, API 4.5.1, HDK 4.5.0. ORM and Manager are unchanged.</p>
+      <p class="page-desc">Every HoloNET package is now released together at one version, in four conductor variants, with project templates.</p>
     </div>
     <div class="content">
 
-<h2 id="v451-2026-10-31">v4.5.1 - 2026-10-31</h2>
+<h2 id="v460-2026-11-01">v4.6.0 - 2026-11-01</h2>
 
+<ul>
+<li><strong>28 library packages (7 libraries x 4 variants) plus a template pack.</strong> Client, ORM, HyperNET, HDK, Manager, API and the Test Harness each come as
+  no conductor, <code>.Embedded</code> (Holochain 0.7.1 and 0.7.0), <code>.Embedded.Holochain071</code> and <code>.Embedded.Holochain070</code>. Each variant depends on the matching
+  Client variant, so conductors are never duplicated. The full list is in <a href="/packages">docs/packages.md</a>, generated from <code>packages.json</code>.</li>
+<li><strong><code>dotnet new</code> templates:</strong> <code>NextGenSoftware.Holochain.HoloNET.Templates</code> adds <code>holonet-console</code>, <code>-worker</code>, <code>-webapi</code>, <code>-mvc</code>, <code>-razor</code>, <code>-blazor</code>,
+  <code>-blazorwasm</code>, <code>-wpf</code>, <code>-winforms</code>, <code>-winui</code>, <code>-avalonia</code>, <code>-maui</code>, <code>-maui-blazor</code>, <code>-uno</code>, <code>-android</code>, <code>-ios</code> and <code>-unity</code>. <code>--HoloNET api|client|orm|hypernet</code>
+  picks the library, <code>--Conductor</code> and <code>--HolochainVersion</code> pick the conductor. See <a href="/templates">docs/templates.md</a>.</li>
+<li><strong>Fixed: the Client could not be installed from NuGet.</strong> It depended on a <code>Chaos.NaCl</code> 1.0.0 package that is not on nuget.org. The assembly is now inside the Client package.</li>
+<li><strong>HDK:</strong> no longer includes WEB5 STAR and HoloOASIS by default. STAR 2.0.6 pulls in OASIS provider packages that depend on the same missing <code>Chaos.NaCl</code>, so a HDK with them could not be installed.
+  <code>-p:HdkIncludeStar=true</code> turns them back on once those packages are fixed.</li>
+<li><strong>API:</strong> targets .NET Standard 2.1 as well as .NET 10 (Unity). The default <code>oasis.happ</code> is now found next to the app, so <code>dotnet run</code> from the project folder works.</li>
+<li><strong>Embedded by default:</strong> on Windows, a Client with a bundled conductor now uses it by default (<code>HolochainConductorMode</code> was <code>UseSystemGlobal</code>, which ignored it). The Manager picks the bundled conductor when there is one.</li>
+<li><strong>.NET 10:</strong> the API, and the Blazor and WinForms templates, are on .NET 10 (the Client, ORM, HyperNET and API keep .NET Standard 2.1 for Unity).</li>
+<li><strong>One script keeps the list complete:</strong> <code>python scripts/holonet_packages.py check | pack | verify-packed | smoke | verify-nuget | set-version | docs</code>. A public workflow
+  checks the list on every push, and the publish workflows build everything from it.</li>
+<li><strong>Sandbox:</strong> <a href="https://sandbox.holonet.oasisomniverse.one">sandbox.holonet.oasisomniverse.one</a> (service in <a href="https://github.com/holochain-open-dev/holochain-client-csharp/blob/main/sandbox/README.md"><code>sandbox/</code></a>): try the API, Client, ORM and HyperNET from a browser.</li>
+<li><strong>Docs and learn sites:</strong> new Templates and Packages pages, and two tutorials (<a href="https://learn.holonet.oasisomniverse.one/tutorials/00-up-and-running-in-5-minutes">Up and running in 5 minutes</a>, <a href="https://learn.holonet.oasisomniverse.one/tutorials/07-a-template-for-every-app">A template for every app</a>).</li>
+</ul>
+<h2 id="v451-2026-10-31">v4.5.1 - 2026-10-31</h2>
+<p>HoloNET Client and HyperNET 4.5.0, API 4.5.1, HDK 4.5.0. ORM and Manager are unchanged.</p>
 <ul>
 <li><strong>Examples.</strong> <a href="/examples"><code>examples/</code></a> has six runnable, commented examples:</li>
 <li>the Client;</li>
@@ -681,6 +701,7 @@ at tag <code>holochain-0.6.1</code> on GitHub) so HoloNET's serialization actual
     <div class="rail-title">On this page</div>
     <nav class="rail-nav">
       <a href="#changelog">Changelog</a>
+      <a href="#v460-2026-11-01">v4.6.0 - 2026-11-01</a>
       <a href="#v451-2026-10-31">v4.5.1 - 2026-10-31</a>
       <a href="#v450-2026-10-16">v4.5.0 - 2026-10-16</a>
       <a href="#v442-2026-10-16">v4.4.2 - 2026-10-16</a>
