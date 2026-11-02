@@ -30,6 +30,7 @@
       <a class="nav-item active" href="/getting-started">Getting started</a>
       <a class="nav-item" href="/templates">Project templates</a>
       <a class="nav-item" href="/packages">Packages</a>
+      <a class="nav-item" href="/conductor">Where the conductor comes from</a>
       <a class="nav-item" href="/examples">Examples</a>
       <div class="nav-section-title">Guides</div>
       <a class="nav-item" href="/client-guide">HoloNET Client</a>
@@ -80,16 +81,20 @@
 </thead>
 <tbody>
 <tr>
-<td>HoloNET to start its own Holochain conductor (simplest)</td>
-<td><code>NextGenSoftware.Holochain.HoloNET.Client.Embedded</code> (bundles 0.7.1 and 0.7.0)</td>
+<td>HoloNET to start its own Holochain conductor, on any OS (simplest)</td>
+<td><code>NextGenSoftware.Holochain.HoloNET.Client</code>: if no conductor is installed it downloads the official one the first time (<code>AutoDownloadConductor</code>, see <a href="/conductor">Where the conductor comes from</a>)</td>
 </tr>
 <tr>
-<td>The same, but a smaller download</td>
+<td>The same, but it must work offline or never download</td>
+<td><code>NextGenSoftware.Holochain.HoloNET.Client.Embedded</code> (bundles 0.7.1 and 0.7.0, Windows)</td>
+</tr>
+<tr>
+<td>The same, with a smaller download</td>
 <td><code>.Client.Embedded.Holochain071</code> or <code>.Client.Embedded.Holochain070</code></td>
 </tr>
 <tr>
 <td>To use a conductor you already run (<code>hc sandbox</code>, a launcher, a server)</td>
-<td><code>NextGenSoftware.Holochain.HoloNET.Client</code></td>
+<td><code>NextGenSoftware.Holochain.HoloNET.Client</code>, with <code>AutoStartHolochainConductor = false</code></td>
 </tr>
 <tr>
 <td>Entry models and collections on top</td>

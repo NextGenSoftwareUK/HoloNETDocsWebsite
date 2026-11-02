@@ -30,6 +30,7 @@
       <a class="nav-item" href="/getting-started">Getting started</a>
       <a class="nav-item" href="/templates">Project templates</a>
       <a class="nav-item" href="/packages">Packages</a>
+      <a class="nav-item" href="/conductor">Where the conductor comes from</a>
       <a class="nav-item" href="/examples">Examples</a>
       <div class="nav-section-title">Guides</div>
       <a class="nav-item" href="/client-guide">HoloNET Client</a>
@@ -72,6 +73,12 @@
 <h2 id="v460-2026-11-01">v4.6.0 - 2026-11-01</h2>
 
 <ul>
+<li><strong>HoloNET downloads the conductor for you (<code>HoloNETDNA.AutoDownloadConductor</code>, on by default).</strong> When no conductor is installed, the Client downloads the official <code>holochain</code> and <code>hc</code> for the computer's OS and CPU (Windows x64, Linux x64/arm64, macOS Intel/Apple Silicon) from Holochain's stable releases, checks them against a pinned SHA-256 (<code>scripts/update_conductor_hashes.py</code> builds the table; releases newer than the table use the digest GitHub publishes) and caches them in <code>%APPDATA%/NextGenSoftware/HoloNET/&lt;version&gt;/</code> (<code>HOLONET_CONDUCTOR_FOLDER</code> overrides it). New settings: <code>AutoDownloadConductor</code>, <code>HolochainConductorVersion</code>, <code>AllowUnverifiedConductorDownload</code>. The conductor now starts without PowerShell on Linux and macOS, so the plain Client works there, and in containers. Embedded packages stay for offline use. A CI job proves it on Ubuntu, macOS and Windows. See <code>docs/conductor.md</code>.</li>
+<li><strong>A conductor that already has the app installed no longer fails the first run.</strong> The conductor enables the app before its cells have started, so signing
+  credentials could answer <code>CellNotRunning</code>; the admin client now asks again for a few seconds. HoloNETAPI also stops the conductor it started when the app exits
+  (it used to outlive the app, and the next run attached to it).</li>
+<li><strong>Unity starter works.</strong> <code>Assets/packages.config</code> lists the whole dependency closure (NuGetForUnity restores only what is listed), and <code>templates/test_unity.py</code>
+  restores the packages, compiles and runs the demo in a real Unity 2022.3 editor.</li>
 <li><strong>28 library packages (7 libraries x 4 variants) plus a template pack.</strong> Client, ORM, HyperNET, HDK, Manager, API and the Test Harness each come as
   no conductor, <code>.Embedded</code> (Holochain 0.7.1 and 0.7.0), <code>.Embedded.Holochain071</code> and <code>.Embedded.Holochain070</code>. Each variant depends on the matching
   Client variant, so conductors are never duplicated. The full list is in <a href="/packages">docs/packages.md</a>, generated from <code>packages.json</code>.</li>
