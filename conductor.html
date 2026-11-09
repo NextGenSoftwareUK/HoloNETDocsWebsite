@@ -88,7 +88,7 @@
 <tr>
 <td>2</td>
 <td><strong>The conductor bundled in an Embedded package</strong></td>
-<td><code>HolochainConductorMode = UseEmbedded</code> (the default on Windows when you installed a <code>.Embedded</code> package). Works offline; nothing is downloaded.</td>
+<td><code>HolochainConductorMode = UseEmbedded</code> (the default when you installed a <code>.Embedded</code> package for your computer). Works offline; nothing is downloaded.</td>
 </tr>
 <tr>
 <td>3</td>
@@ -148,7 +148,7 @@ var offline = new HoloNETClientAdmin(new HoloNETDNA { AutoDownloadConductor = fa
 <h3 id="servers-and-containers">Servers and containers</h3>
 <p>On Linux (a Docker image, Railway, a VM) the plain Client package is all you need. To keep container start-up fast, run your app once during the image build, or mount the cache folder on a persistent volume, so the 50 MB download is not repeated on every start. The conductor is started directly (no PowerShell), and stopped when the app disconnects.</p>
 <h2 id="embedded-packages">Embedded packages</h2>
-<p><code>NextGenSoftware.Holochain.HoloNET.Client.Embedded</code> (and the <code>.Holochain071</code> / <code>.Holochain070</code> single-version packages) carry the conductor inside the DLL, for apps that must work offline or must not download anything at run time (Unity games, installers). The bundled conductors are Windows programs; on Linux and macOS an Embedded package falls back to the PATH and <code>AutoDownloadConductor</code>. See <a href="/packages">Packages</a> for the full list.</p>
+<p><code>NextGenSoftware.Holochain.HoloNET.Client.Embedded</code> (and the <code>.Holochain071</code> / <code>.Holochain070</code> single-version packages) carry the conductor inside the DLL, for apps that must work offline or must not download anything at run time (Unity games, installers). There are Embedded packages for every system Holochain publishes: Windows x64 (<code>.Embedded</code>), Linux x64 (<code>.Embedded.LinuxX64</code>), Linux arm64 (<code>.Embedded.LinuxArm64</code>), macOS Intel (<code>.Embedded.MacX64</code>) and macOS Apple Silicon (<code>.Embedded.MacArm64</code>), each with both Holochain versions or just <code>.Holochain071</code> / <code>.Holochain070</code>, for the Client, ORM, HyperNET and API. Each package holds one system and one processor, so none is bigger than the Windows one. The conductor is unpacked on first use into the same cache folder the download uses (and made executable on Linux and macOS). A package for a different system than the one it runs on is noticed and HoloNET falls back to the PATH and <code>AutoDownloadConductor</code>. See <a href="/packages">Packages</a> for the full list.</p>
     </div>
   </main>
 

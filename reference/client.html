@@ -4240,6 +4240,11 @@
 <td>Utility method to convert from base64 bytes (Holochain Conductor format) to a friendly C# format. This is used to convert the AgentPubKey &amp; DnaHash retrieved from the Conductor.|</td>
 </tr>
 <tr>
+<td><code>static string CurrentEmbeddedPlatform()</code></td>
+<td>method</td>
+<td>This computer's runtime identifier as the Embedded packages name it: win-x64, linux-x64, linux-arm64, osx-x64 or osx-arm64 (null for anything else).</td>
+</tr>
+<tr>
 <td><code>static T DeserializeResponseValue&lt;T&gt;(byte[] envelope, MessagePackSerializerOptions options)</code></td>
 <td>method</td>
 <td>Decode a conductor response envelope's value as T (MessagePack).</td>
@@ -4283,6 +4288,11 @@
 <td><code>Task&lt;byte[][]&gt; GetCellIdAsync()</code></td>
 <td>method</td>
 <td>The cell id zome calls go to: HoloNETDNA.CellId, or built from its DnaHash and AgentPubKey (retrieving them from the conductor first if needed).</td>
+</tr>
+<tr>
+<td><code>static bool IsEmbeddedBundleForThisComputer()</code></td>
+<td>method</td>
+<td>True when the conductors this build bundles are for the computer it is running on: the Embedded package for Windows on Windows, .Embedded.LinuxX64 on x64 Linux and so on. A package for another system (or the lightweight package, which bundles none) is not usable here.</td>
 </tr>
 <tr>
 <td><code>static bool IsEmbeddedHolochainVersionBundled(EmbeddedHolochainVersion version)</code></td>

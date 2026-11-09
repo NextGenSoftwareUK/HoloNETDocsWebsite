@@ -86,7 +86,7 @@
 </tr>
 <tr>
 <td>The same, but it must work offline or never download</td>
-<td><code>NextGenSoftware.Holochain.HoloNET.Client.Embedded</code> (bundles 0.7.1 and 0.7.0, Windows)</td>
+<td><code>NextGenSoftware.Holochain.HoloNET.Client.Embedded</code> (bundles 0.7.1 and 0.7.0, Windows; <code>.Embedded.LinuxX64</code>, <code>.LinuxArm64</code>, <code>.MacX64</code> and <code>.MacArm64</code> for Linux and macOS)</td>
 </tr>
 <tr>
 <td>The same, with a smaller download</td>
@@ -116,7 +116,7 @@
 </table></div>
 <div class="code-block"><div class="code-block-header"><span class="code-lang">bash</span><button class="copy-btn">Copy</button></div><pre>dotnet add package NextGenSoftware.Holochain.HoloNET.Client.Embedded
 </pre></div>
-<p>Use one variant per app. They have the same API and namespaces; only the bundled conductor differs. Every library comes in the same four variants (none, <code>.Embedded</code>, <code>.Embedded.Holochain071</code>, <code>.Embedded.Holochain070</code>); see <a href="/packages">Packages</a> for the full list. The bundled conductors are Windows programs: on other systems use the package with no suffix and run your own conductor.</p>
+<p>Use one variant per app. They have the same API and namespaces; only the bundled conductor differs. Every library comes in the same four variants (none, <code>.Embedded</code>, <code>.Embedded.Holochain071</code>, <code>.Embedded.Holochain070</code>); see <a href="/packages">Packages</a> for the full list. <code>.Embedded</code> bundles the Windows conductors; Linux and macOS have their own offline packages (<code>.Embedded.LinuxX64</code>, <code>.LinuxArm64</code>, <code>.MacX64</code>, <code>.MacArm64</code>, each with <code>.Holochain071</code> / <code>.Holochain070</code> or both) for the Client, ORM, HyperNET and API. Or use the package with no suffix and HoloNET downloads the conductor.</p>
 <h2 id="2-which-holochain-version">2. Which Holochain version?</h2>
 <p>Both are supported and tested on every release.</p>
 <ul>

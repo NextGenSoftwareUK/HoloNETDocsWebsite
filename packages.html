@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Packages — HOLONET DOCS</title>
-<meta name="description" content="HoloNET is 7 libraries, each published as 4 NuGet packages, plus a template pack: 29 packages, all released together at version 4.6.0.
+<meta name="description" content="HoloNET is 7 libraries, each published as 4 NuGet packages (more for the ones with Linux and macOS conductors), plus a template pack: 77 packages, all released together at version 4.6.0.
 Every package has the same version, so you never have to work out which versions go together.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -67,7 +67,7 @@ Every package has the same version, so you never have to work out which versions
       <div class="breadcrumb"><a href="/">HOLONET DOCS</a><span class="breadcrumb-sep">/</span><span>Overview</span></div>
       <div class="page-meta"><span class="badge badge-reference">Guide</span><span class="badge badge-version">HoloNET 4.x · Holochain 0.7.0 / 0.7.1</span></div>
       <h1 class="page-title">Packages</h1>
-      <p class="page-desc">HoloNET is 7 libraries, each published as 4 NuGet packages, plus a template pack: <strong>29 packages</strong>, all released together at <strong>version 4.6.0</strong>.
+      <p class="page-desc">HoloNET is 7 libraries, each published as 4 NuGet packages (more for the ones with Linux and macOS conductors), plus a template pack: <strong>77 packages</strong>, all released together at <strong>version 4.6.0</strong>.
 Every package has the same version, so you never have to work out which versions go together.</p>
     </div>
     <div class="content">
@@ -133,7 +133,7 @@ Every package has the same version, so you never have to work out which versions
 <tr>
 <td><code>.Embedded</code></td>
 <td>Holochain 0.7.1 <strong>and</strong> 0.7.0</td>
-<td>You want HoloNET to start and stop the conductor for you (Windows). Choose the version at run time with <code>HoloNETDNA.EmbeddedHolochainVersion</code>.</td>
+<td>You want HoloNET to start and stop the conductor for you (Windows x64; for Linux and macOS use <code>.Embedded.LinuxX64</code>, <code>.LinuxArm64</code>, <code>.MacX64</code> or <code>.MacArm64</code>, below). Choose the version at run time with <code>HoloNETDNA.EmbeddedHolochainVersion</code>.</td>
 </tr>
 <tr>
 <td><code>.Embedded.Holochain071</code></td>
@@ -147,8 +147,39 @@ Every package has the same version, so you never have to work out which versions
 </tr>
 </tbody>
 </table></div>
-<p>The bundled conductors are Windows programs. On other systems use the package with no suffix and run your own conductor. Use one variant per app: they have the same API and namespaces.
+<p>Those are the Windows conductors. For Linux and macOS see the next section; for browser and phone apps use the package with no suffix and run your own conductor. Use one variant per app: they have the same API and namespaces.
 ORM, HyperNET, HDK, Manager, API and TestHarness depend on the Client variant that matches their own, so an <code>.Embedded.Holochain071</code> package always pulls in the Client with 0.7.1 and nothing else.</p>
+<h2 id="offline-packages-for-linux-and-macos">Offline packages for Linux and macOS</h2>
+<p><code>Client</code>, <code>ORM</code>, <code>HyperNET</code>, <code>API</code> also come with the conductor bundled for Linux and macOS, so an app works with no internet and nothing to install. Each package holds one operating system and processor (so none is bigger than the Windows ones), and the same three Holochain choices:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Package suffix</th>
+<th>For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.Embedded.LinuxX64</code></td>
+<td>Linux x64</td>
+</tr>
+<tr>
+<td><code>.Embedded.LinuxArm64</code></td>
+<td>Linux arm64</td>
+</tr>
+<tr>
+<td><code>.Embedded.MacX64</code></td>
+<td>macOS Intel</td>
+</tr>
+<tr>
+<td><code>.Embedded.MacArm64</code></td>
+<td>macOS Apple Silicon</td>
+</tr>
+</tbody>
+</table></div>
+<p>Add <code>.Holochain071</code> or <code>.Holochain070</code> after the platform for a single Holochain version, for example <code>NextGenSoftware.Holochain.HoloNET.Client.Embedded.LinuxArm64.Holochain071</code>. With no version suffix the package holds 0.7.1 and 0.7.0 and you choose with <code>HoloNETDNA.EmbeddedHolochainVersion</code>.
+You do not have to use these: with the plain package HoloNET downloads the right conductor the first time (<a href="/conductor">where the conductor comes from</a>). Use them when the machine is offline or you want a fixed, tested conductor inside the package.
+A package built for another system is noticed at run time and HoloNET falls back to the conductor on the PATH or the download.</p>
 <h2 id="all-packages">All packages</h2>
 <div class="table-wrap"><table>
 <thead>
@@ -175,6 +206,54 @@ ORM, HyperNET, HDK, Manager, API and TestHarness depend on the Client variant th
 <td>4.6.0</td>
 </tr>
 <tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.Client.Embedded.LinuxX64"><code>NextGenSoftware.Holochain.HoloNET.Client.Embedded.LinuxX64</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.Client.Embedded.LinuxX64.Holochain071"><code>NextGenSoftware.Holochain.HoloNET.Client.Embedded.LinuxX64.Holochain071</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.Client.Embedded.LinuxX64.Holochain070"><code>NextGenSoftware.Holochain.HoloNET.Client.Embedded.LinuxX64.Holochain070</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.Client.Embedded.LinuxArm64"><code>NextGenSoftware.Holochain.HoloNET.Client.Embedded.LinuxArm64</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.Client.Embedded.LinuxArm64.Holochain071"><code>NextGenSoftware.Holochain.HoloNET.Client.Embedded.LinuxArm64.Holochain071</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.Client.Embedded.LinuxArm64.Holochain070"><code>NextGenSoftware.Holochain.HoloNET.Client.Embedded.LinuxArm64.Holochain070</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.Client.Embedded.MacX64"><code>NextGenSoftware.Holochain.HoloNET.Client.Embedded.MacX64</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.Client.Embedded.MacX64.Holochain071"><code>NextGenSoftware.Holochain.HoloNET.Client.Embedded.MacX64.Holochain071</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.Client.Embedded.MacX64.Holochain070"><code>NextGenSoftware.Holochain.HoloNET.Client.Embedded.MacX64.Holochain070</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.Client.Embedded.MacArm64"><code>NextGenSoftware.Holochain.HoloNET.Client.Embedded.MacArm64</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.Client.Embedded.MacArm64.Holochain071"><code>NextGenSoftware.Holochain.HoloNET.Client.Embedded.MacArm64.Holochain071</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.Client.Embedded.MacArm64.Holochain070"><code>NextGenSoftware.Holochain.HoloNET.Client.Embedded.MacArm64.Holochain070</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
 <td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.ORM"><code>NextGenSoftware.Holochain.HoloNET.ORM</code></a></td>
 <td>4.6.0</td>
 </tr>
@@ -191,6 +270,54 @@ ORM, HyperNET, HDK, Manager, API and TestHarness depend on the Client variant th
 <td>4.6.0</td>
 </tr>
 <tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.ORM.Embedded.LinuxX64"><code>NextGenSoftware.Holochain.HoloNET.ORM.Embedded.LinuxX64</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.ORM.Embedded.LinuxX64.Holochain071"><code>NextGenSoftware.Holochain.HoloNET.ORM.Embedded.LinuxX64.Holochain071</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.ORM.Embedded.LinuxX64.Holochain070"><code>NextGenSoftware.Holochain.HoloNET.ORM.Embedded.LinuxX64.Holochain070</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.ORM.Embedded.LinuxArm64"><code>NextGenSoftware.Holochain.HoloNET.ORM.Embedded.LinuxArm64</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.ORM.Embedded.LinuxArm64.Holochain071"><code>NextGenSoftware.Holochain.HoloNET.ORM.Embedded.LinuxArm64.Holochain071</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.ORM.Embedded.LinuxArm64.Holochain070"><code>NextGenSoftware.Holochain.HoloNET.ORM.Embedded.LinuxArm64.Holochain070</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.ORM.Embedded.MacX64"><code>NextGenSoftware.Holochain.HoloNET.ORM.Embedded.MacX64</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.ORM.Embedded.MacX64.Holochain071"><code>NextGenSoftware.Holochain.HoloNET.ORM.Embedded.MacX64.Holochain071</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.ORM.Embedded.MacX64.Holochain070"><code>NextGenSoftware.Holochain.HoloNET.ORM.Embedded.MacX64.Holochain070</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.ORM.Embedded.MacArm64"><code>NextGenSoftware.Holochain.HoloNET.ORM.Embedded.MacArm64</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.ORM.Embedded.MacArm64.Holochain071"><code>NextGenSoftware.Holochain.HoloNET.ORM.Embedded.MacArm64.Holochain071</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.ORM.Embedded.MacArm64.Holochain070"><code>NextGenSoftware.Holochain.HoloNET.ORM.Embedded.MacArm64.Holochain070</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
 <td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.HyperNET"><code>NextGenSoftware.Holochain.HoloNET.HyperNET</code></a></td>
 <td>4.6.0</td>
 </tr>
@@ -204,6 +331,54 @@ ORM, HyperNET, HDK, Manager, API and TestHarness depend on the Client variant th
 </tr>
 <tr>
 <td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.Holochain070"><code>NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.Holochain070</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.LinuxX64"><code>NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.LinuxX64</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.LinuxX64.Holochain071"><code>NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.LinuxX64.Holochain071</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.LinuxX64.Holochain070"><code>NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.LinuxX64.Holochain070</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.LinuxArm64"><code>NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.LinuxArm64</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.LinuxArm64.Holochain071"><code>NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.LinuxArm64.Holochain071</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.LinuxArm64.Holochain070"><code>NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.LinuxArm64.Holochain070</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.MacX64"><code>NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.MacX64</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.MacX64.Holochain071"><code>NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.MacX64.Holochain071</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.MacX64.Holochain070"><code>NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.MacX64.Holochain070</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.MacArm64"><code>NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.MacArm64</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.MacArm64.Holochain071"><code>NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.MacArm64.Holochain071</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.MacArm64.Holochain070"><code>NextGenSoftware.Holochain.HoloNET.HyperNET.Embedded.MacArm64.Holochain070</code></a></td>
 <td>4.6.0</td>
 </tr>
 <tr>
@@ -255,6 +430,54 @@ ORM, HyperNET, HDK, Manager, API and TestHarness depend on the Client variant th
 <td>4.6.0</td>
 </tr>
 <tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.API.Embedded.LinuxX64"><code>NextGenSoftware.Holochain.HoloNET.API.Embedded.LinuxX64</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.API.Embedded.LinuxX64.Holochain071"><code>NextGenSoftware.Holochain.HoloNET.API.Embedded.LinuxX64.Holochain071</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.API.Embedded.LinuxX64.Holochain070"><code>NextGenSoftware.Holochain.HoloNET.API.Embedded.LinuxX64.Holochain070</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.API.Embedded.LinuxArm64"><code>NextGenSoftware.Holochain.HoloNET.API.Embedded.LinuxArm64</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.API.Embedded.LinuxArm64.Holochain071"><code>NextGenSoftware.Holochain.HoloNET.API.Embedded.LinuxArm64.Holochain071</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.API.Embedded.LinuxArm64.Holochain070"><code>NextGenSoftware.Holochain.HoloNET.API.Embedded.LinuxArm64.Holochain070</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.API.Embedded.MacX64"><code>NextGenSoftware.Holochain.HoloNET.API.Embedded.MacX64</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.API.Embedded.MacX64.Holochain071"><code>NextGenSoftware.Holochain.HoloNET.API.Embedded.MacX64.Holochain071</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.API.Embedded.MacX64.Holochain070"><code>NextGenSoftware.Holochain.HoloNET.API.Embedded.MacX64.Holochain070</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.API.Embedded.MacArm64"><code>NextGenSoftware.Holochain.HoloNET.API.Embedded.MacArm64</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.API.Embedded.MacArm64.Holochain071"><code>NextGenSoftware.Holochain.HoloNET.API.Embedded.MacArm64.Holochain071</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.API.Embedded.MacArm64.Holochain070"><code>NextGenSoftware.Holochain.HoloNET.API.Embedded.MacArm64.Holochain070</code></a></td>
+<td>4.6.0</td>
+</tr>
+<tr>
 <td><a href="https://www.nuget.org/packages/NextGenSoftware.Holochain.HoloNET.Client.TestHarness"><code>NextGenSoftware.Holochain.HoloNET.Client.TestHarness</code></a></td>
 <td>4.6.0</td>
 </tr>
@@ -292,7 +515,7 @@ dotnet new holonet-blazor -n MyApp --HoloNET orm
 <tbody>
 <tr>
 <td>To save and load data in one line</td>
-<td><code>NextGenSoftware.Holochain.HoloNET.API</code> (add <code>.Embedded</code> on Windows to bundle the conductor)</td>
+<td><code>NextGenSoftware.Holochain.HoloNET.API</code> (add <code>.Embedded</code> on Windows, or <code>.Embedded.LinuxX64</code>, <code>.LinuxArm64</code>, <code>.MacX64</code> or <code>.MacArm64</code> on Linux and macOS, to bundle the conductor)</td>
 </tr>
 <tr>
 <td>To call your own hApp's zome functions</td>
@@ -367,6 +590,7 @@ so a package cannot be forgotten.</p>
       <a href="#packages">Packages</a>
       <a href="#the-libraries">The libraries</a>
       <a href="#the-four-packages-for-each-library">The four packages for each library</a>
+      <a href="#offline-packages-for-linux-and-macos">Offline packages for Linux and macOS</a>
       <a href="#all-packages">All packages</a>
       <a href="#project-templates">Project templates</a>
       <a href="#which-one-do-i-want">Which one do I want?</a>
