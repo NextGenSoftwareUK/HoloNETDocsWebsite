@@ -178,13 +178,13 @@ dotnet new holonet-webapi -n MyApp --HoloNET client    # a Web API using the Hol
 <td><code>holonet-android</code></td>
 <td>Android (native)</td>
 <td>a button on the main activity</td>
-<td>The runtime on the phone (shared, else built in); needs the runtime libraries</td>
+<td>The runtime on the phone (shared, else built in); libraries download on first build</td>
 </tr>
 <tr>
 <td><code>holonet-ios</code></td>
 <td>iOS (native)</td>
 <td>a button on the main screen</td>
-<td>No: connects to your conductor (the iOS conductor is simulator-only so far)</td>
+<td>iOS: the conductor in the app, with the iOS bridge library (simulator-proven only); elsewhere connects to your conductor</td>
 </tr>
 <tr>
 <td><code>holonet-grpc</code></td>
@@ -212,8 +212,8 @@ dotnet new holonet-webapi -n MyApp --HoloNET client    # a Web API using the Hol
 </tr>
 </tbody>
 </table></div>
-<p>Why some don't bundle a conductor: a browser can't host one, an iPhone's conductor isn't proven on a device yet, and on Android the conductor lives in the phone's runtime rather than in the template, so those apps connect to a
-conductor you run on your computer (or on a server) instead, except on Android with the runtime libraries. See <a href="#running-on-mobile-and-in-the-browser">Running on mobile and in the browser</a>.</p>
+<p>Why some don't bundle a conductor: a browser can't host one, and on a phone the conductor comes from the runtime libraries rather than the template, so those apps connect to a
+conductor you run on your computer (or on a server) instead when the libraries aren't there. See <a href="#running-on-mobile-and-in-the-browser">Running on mobile and in the browser</a>.</p>
 <h2 id="the-options">The options</h2>
 <p>Every template has the same options.</p>
 <div class="table-wrap"><table>
@@ -309,17 +309,57 @@ You can generate a hApp from your C# classes: see <a href="https://github.com/ho
 <li>If the runtime isn't installed, isn't approved in time (60 seconds by default) or setup fails, the app <strong>falls back to the conductor built into the app</strong>.</li>
 <li>Zome calls are signed by the conductor, because an app has no admin access to sign for itself. <code>HoloNETAndroidRuntime.cs</code> (in the template) wires this into HoloNET with <code>IZomeCallSigner</code>.</li>
 </ol>
-<p>It uses the runtime when you create the project with <code>--HoloNET client</code> (the default for <code>holonet-android</code>) or <code>--HoloNET orm</code>. The HoloNET API and HyperNET libraries install the hApp through the conductor's admin interface, which the shared runtime doesn't expose to apps, so with those two the app still connects to a conductor you run (a HoloNET API change to accept an app-only connection is the follow-up).</p>
-<p>The runtime libraries are large (the conductor is about 100 MB, arm64 only), so they aren't inside the template: put the bridge and runtime <code>.aar</code> files in the project's <code>runtime/android</code> folder (its <code>README.md</code> lists them, and the bridge source is in <a href="https://github.com/holochain-open-dev/holochain-client-csharp/tree/main/android-runtime">android-runtime</a>). Without them the app builds and connects to a conductor you run, as before.</p>
-<p><strong>Status, so you know what is proven.</strong> The shared-runtime path is proven by the OASIS team on an x86_64 emulator, not yet on a physical phone. The template's C# wrapper compiles for Android but has <strong>not been run on a device or emulator</strong>, and the Holochain 0.7 <code>client</code>/<code>service</code> <code>.aar</code> files are not yet published as release assets (the runtime APKs are). Treat it as ready to test, not as verified.</p>
-<p><strong>iOS (<code>holonet-ios</code>, and the iOS targets of MAUI, MAUI Blazor and Uno).</strong> An iPhone can't run a separate conductor process, so the iOS runtime links the conductor into the app (<code>HolochainConductor.xcframework</code>, with Swift bindings). It runs on the <strong>iOS simulator</strong> (it starts, installs the OASIS hApp and signs a zome call) but is <strong>not yet proven on a physical iPhone</strong>, and the templates don't wire it in: on iOS the app connects to a conductor you run.</p>
+<p>It works with every <code>--HoloNET</code> choice: the Client and ORM demos use the app connection directly, the API uses <code>HoloNETAPI.UseAppClientAsync</code> (new in 4.6.0), and the HyperNET demo joins a zone as the one player the runtime holds.</p>
+<p>The runtime libraries (client, service and bridge <code>.aar</code> files and their dependencies, about 38 MB, arm64 only) are published as the <a href="https://github.com/NextGenSoftwareUK/android-service-runtime/releases/tag/oasis-android-libs-v1.0.0">oasis-android-libs-v1.0.0</a> release and the template downloads them into <code>runtime/android</code> on the first build (set <code>HoloNETDownloadRuntime=false</code> to skip). The bridge source is in <a href="https://github.com/holochain-open-dev/holochain-client-csharp/tree/main/android-runtime">android-runtime</a> and the build is the <code>oasis-android-libraries</code> workflow in the runtime repository. They need Android 8.1 (API 27) or newer. If they are missing the app connects to a conductor you run.</p>
+<p><strong>Status, so you know what is proven.</strong> The shared-runtime path is proven by the OASIS team on an x86_64 emulator, not yet on a physical phone. The template's C# wrapper compiles for Android and the real libraries are packed into the APK, but it has <strong>not been run on a device or emulator</strong>. Treat it as ready to test, not as verified.</p>
+<p><strong>iOS (<code>holonet-ios</code>, and the iOS targets of MAUI, MAUI Blazor and Uno).</strong> An iPhone can't run a separate conductor process, so the conductor is linked into the app (Holochain 0.7 with the wasmi interpreter, because iOS forbids JIT). <code>HoloNETIosRuntime.cs</code> (in the template) starts it through <code>HoloNETIosBridge.xcframework</code>, the <code>holo_ios_*</code> C ABI merged with the conductor, published as <a href="https://github.com/NextGenSoftwareUK/android-service-runtime/releases/tag/oasis-ios-bridge-v1.0.0">oasis-ios-bridge-v1.0.0</a>: download and unzip it into <code>runtime/ios</code> (about 127 MB). It runs on the <strong>iOS simulator</strong> in the OASIS team's CI, but is <strong>not yet proven on a physical iPhone</strong>, and the template's iOS wrapper has <strong>not been compiled or run by us on a Mac</strong> (this machine has no Mac). Without the library the iOS app connects to a conductor you run.</p>
 <p>Where the phone runtimes live:</p>
 <ul>
 <li><strong>Android and iOS source:</strong> <a href="https://github.com/NextGenSoftwareUK/android-service-runtime">NextGenSoftwareUK/android-service-runtime</a> (our fork of Holochain's <a href="https://github.com/holochain/android-service-runtime">android-service-runtime</a>; our Holochain 0.7 work is on the <a href="https://github.com/NextGenSoftwareUK/android-service-runtime/tree/oasis/holochain-0.7"><code>oasis/holochain-0.7</code></a> branch).</li>
-<li><strong>Android releases:</strong> <a href="https://github.com/NextGenSoftwareUK/android-service-runtime/releases/tag/oasis-holochain-0.7-v1.0.0">oasis-holochain-0.7-v1.0.0</a> (pre-release: arm64 and x86_64 APKs, build manifest, iOS xcframework, Swift bindings, SHA256SUMS) and <a href="https://github.com/NextGenSoftwareUK/android-service-runtime/releases/tag/oasis-runtime-v0.2.0-holochain-0.7">oasis-runtime-v0.2.0-holochain-0.7</a>.</li>
+<li><strong>Android libraries for apps:</strong> <a href="https://github.com/NextGenSoftwareUK/android-service-runtime/releases/tag/oasis-android-libs-v1.0.0">oasis-android-libs-v1.0.0</a> (client, service, bridge and dependencies, built by the <code>oasis-android-libraries</code> workflow).</li>
+<li><strong>iOS bridge for .NET apps:</strong> <a href="https://github.com/NextGenSoftwareUK/android-service-runtime/releases/tag/oasis-ios-bridge-v1.0.0">oasis-ios-bridge-v1.0.0</a> (built by the <code>oasis-ios-bridge</code> workflow).</li>
+<li><strong>Android runtime app releases:</strong> <a href="https://github.com/NextGenSoftwareUK/android-service-runtime/releases/tag/oasis-holochain-0.7-v1.0.0">oasis-holochain-0.7-v1.0.0</a> (pre-release: arm64 and x86_64 APKs, build manifest, iOS xcframework, Swift bindings, SHA256SUMS) and <a href="https://github.com/NextGenSoftwareUK/android-service-runtime/releases/tag/oasis-runtime-v0.2.0-holochain-0.7">oasis-runtime-v0.2.0-holochain-0.7</a>.</li>
 <li><strong>iOS releases:</strong> <a href="https://github.com/NextGenSoftwareUK/android-service-runtime/releases/tag/oasis-ios-conductor-v0.7.1">oasis-ios-conductor-v0.7.1</a> and <a href="https://github.com/NextGenSoftwareUK/android-service-runtime/releases/tag/oasis-ios-conductor-v0.1.1">oasis-ios-conductor-v0.1.1</a>.</li>
-<li><strong>OASIS Edge runtime</strong> (what Our World uses to run on phones): <a href="https://github.com/NextGenSoftwareUK/OASIS/releases">OASIS releases</a>: <code>OASIS-Edge-Runtime-v1.2.0</code>, <code>OASIS-Edge-Unity-v1.1.0</code>, <code>OGEngineClient-Edge-v2.1.0</code>. The OASIS repo holds the Edge runtime and Unity bridge, not the Android and iOS runtimes.</li>
+<li><strong>OASIS Edge runtime</strong> (what Our World uses to run on phones): see the table below.</li>
 </ul>
+<p><strong>OASIS Edge runtime and OGEngineClient releases</strong> (all in <a href="https://github.com/NextGenSoftwareUK/OASIS/releases">NextGenSoftwareUK/OASIS releases</a>; the OASIS repo holds the Edge runtime and Unity bridge source, not the Android and iOS runtimes). Pick the one that matches your app:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>You want</th>
+<th>Release</th>
+<th>Archives</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The Edge runtime only (a non-Unity .NET host; libraries, not an app)</td>
+<td><a href="https://github.com/NextGenSoftwareUK/OASIS/releases/tag/OASIS-Edge-Runtime-v1.2.0">OASIS-Edge-Runtime-v1.2.0</a></td>
+<td>Windows x64, Linux x64/ARM64, macOS x64/ARM64</td>
+</tr>
+<tr>
+<td>OGEngineClient + Edge (managed and native game client with the local/offline Edge stack)</td>
+<td><a href="https://github.com/NextGenSoftwareUK/OASIS/releases/tag/OGEngineClient-Edge-v2.1.0">OGEngineClient-Edge-v2.1.0</a></td>
+<td>the same five platforms</td>
+</tr>
+<tr>
+<td>OGEngineClient + Edge + Unity (the Unity package, with the OGEngineClient Edge integration)</td>
+<td><a href="https://github.com/NextGenSoftwareUK/OASIS/releases/tag/OASIS-Edge-Unity-v1.1.0">OASIS-Edge-Unity-v1.1.0</a></td>
+<td>one Unity package zip</td>
+</tr>
+<tr>
+<td>OGEngineClient only, hosted services, no local Edge</td>
+<td><a href="https://github.com/NextGenSoftwareUK/OASIS/releases/tag/OGEngineClient-RemoteOnly-v2.1.0">OGEngineClient-RemoteOnly-v2.1.0</a></td>
+<td>the same five platforms</td>
+</tr>
+<tr>
+<td>Older OGEngineClient (Edge-enabled, one managed archive)</td>
+<td><a href="https://github.com/NextGenSoftwareUK/OASIS/releases/tag/OGEngineClient-v2.0.2">OGEngineClient-v2.0.2</a></td>
+<td>one managed zip</td>
+</tr>
+</tbody>
+</table></div>
+<p>How they fit together is in <a href="https://github.com/NextGenSoftwareUK/OASIS/blob/Development/Docs/WIP/Edge%20and%20Games/EDGE_DISTRIBUTIONS.md">Edge and game-client distributions</a> and <a href="https://github.com/NextGenSoftwareUK/OASIS/blob/Development/Docs/WIP/Edge%20and%20Games/EDGE_RUNTIME_RELEASES.md">Edge runtime releases</a>. The Holochain layer is Edge Runtime, then HoloOASIS.Edge, then HoloOASIS.Unity, then HoloNET and the Holochain conductor; Edge does not include a conductor by itself, so on a phone the conductor comes from the Android or iOS runtime above.</p>
 <p>Everywhere the runtime isn't used (iOS, the browser, or Android without the runtime libraries):</p>
 <ul>
 <li>Start a conductor on your development computer with the included script. It listens on <code>ws://localhost:7777</code>.</li>
