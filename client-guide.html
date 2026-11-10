@@ -168,7 +168,7 @@
 <div class="code-block"><div class="code-block-header"><span class="code-lang">csharp</span><button class="copy-btn">Copy</button></div><pre>var admin = new HoloNETClientAdmin(new HoloNETDNA { HolochainConductorMode = HolochainConductorModeEnum.UseEmbedded });
 HoloNETConnectedEventArgs connected = await admin.ConnectAsync();
 </pre></div>
-<p><strong>The one-call install.</strong> <code>InstallEnableSignAttachAndConnectToHappAsync(appId, happPath, roleName)</code> does every step Holochain 0.7 needs:</p>
+<p><strong>The one-call install.</strong> <code>InstallEnableSignAttachAndConnectToHappAsync(appId, happPath, roleName)</code> does every step Holochain 0.7.0 and 0.7.1 need:</p>
 <ol>
 <li>Generates an agent key and installs the app. An app that's already installed is kept, with its agent, unless you pass <code>uninstallhAppIfAlreadyInstalled: true</code>.</li>
 <li>Enables it.</li>

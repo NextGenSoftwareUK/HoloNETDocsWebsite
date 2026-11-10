@@ -127,7 +127,7 @@
 <div class="code-block"><div class="code-block-header"><span class="code-lang">csharp</span><button class="copy-btn">Copy</button></div><pre>var dna = new HoloNETDNA { EmbeddedHolochainVersion = EmbeddedHolochainVersion.V0_7_0 };
 </pre></div>
 <h2 id="3-install-a-happ-and-call-a-zome-function">3. Install a hApp and call a zome function</h2>
-<p>The admin client does the whole Holochain 0.7 setup in one call:</p>
+<p>The admin client does the whole Holochain 0.7.0 and 0.7.1 setup in one call:</p>
 <ol>
 <li>Generates an agent key.</li>
 <li>Installs the <code>.happ</code> (or keeps it if it's already installed).</li>
@@ -174,11 +174,11 @@ else
 <li><strong>Your own entry types as C# classes:</strong> see the <a href="/orm-guide">HoloNET ORM guide</a>.</li>
 <li><strong>Multiplayer:</strong> see the <a href="/hypernet-guide">HyperNET guide</a>.</li>
 </ul>
-<h2 id="5-things-that-trip-people-up-on-holochain-07">5. Things that trip people up on Holochain 0.7</h2>
+<h2 id="5-things-that-trip-people-up-on-holochain-070-and-071">5. Things that trip people up on Holochain 0.7.0 and 0.7.1</h2>
 <ul>
 <li><strong>ActionHash vs EntryHash.</strong> Updates and deletes take the ActionHash of the record (<code>result.ZomeReturnHash</code> after a create). The ORM handles this for you.</li>
 <li><strong>App authentication tokens.</strong> Since 0.6, every app-interface connection needs a token from the admin API. <code>InstallEnableSignAttachAndConnectToHappAsync</code> gets one. If you connect an app client yourself, call <code>admin.IssueAppAuthenticationTokenAsync</code> and set <code>HoloNETDNA.AppAuthenticationToken</code>.</li>
-<li><strong>Capability grants.</strong> Holochain 0.7 rejects unrestricted grants for zome-call signing. HoloNET defaults to <code>CapGrantAccessType.Assigned</code>, which is correct.</li>
+<li><strong>Capability grants.</strong> Holochain 0.7.0 and 0.7.1 reject unrestricted grants for zome-call signing. HoloNET defaults to <code>CapGrantAccessType.Assigned</code>, which is correct.</li>
 <li><strong>Sync methods inside events.</strong> Every method has a sync version, and they are safe to call from inside HoloNET's own event handlers. Prefer the <code>Async</code> versions anyway.</li>
 </ul>
 <h2 id="6-logging">6. Logging</h2>
@@ -194,7 +194,7 @@ else
       <a href="#2-which-holochain-version">2. Which Holochain version?</a>
       <a href="#3-install-a-happ-and-call-a-zome-function">3. Install a hApp and call a zome function</a>
       <a href="#4-go-higher-level">4. Go higher level</a>
-      <a href="#5-things-that-trip-people-up-on-holochain-07">5. Things that trip people up on Holochain 0.7</a>
+      <a href="#5-things-that-trip-people-up-on-holochain-070-and-071">5. Things that trip people up on Holochain 0.7.0 and 0.7.1</a>
       <a href="#6-logging">6. Logging</a>
     </nav>
   </aside>

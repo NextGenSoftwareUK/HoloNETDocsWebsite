@@ -149,8 +149,8 @@ Every package has the same version, so you never have to work out which versions
 </table></div>
 <p>Those are the Windows conductors. For Linux and macOS see the next section; for browser apps use the package with no suffix and run your own conductor; Android apps use the package with no suffix and the Holochain runtime on the phone (see <a href="https://github.com/holochain-open-dev/holochain-client-csharp/blob/main/docs/templates#running-on-mobile-and-in-the-browser">Templates</a>). Use one variant per app: they have the same API and namespaces.
 ORM, HyperNET, HDK, Manager, API and TestHarness depend on the Client variant that matches their own, so an <code>.Embedded.Holochain071</code> package always pulls in the Client with 0.7.1 and nothing else.</p>
-<h2 id="offline-packages-for-linux-and-macos">Offline packages for Linux and macOS</h2>
-<p><code>Client</code>, <code>ORM</code>, <code>HyperNET</code>, <code>API</code> also come with the conductor bundled for Linux and macOS, so an app works with no internet and nothing to install. Each package holds one operating system and processor (so none is bigger than the Windows ones), and the same three Holochain choices:</p>
+<h2 id="offline-packages-for-windows-linux-and-macos">Offline packages for Windows, Linux and macOS</h2>
+<p><code>Client</code>, <code>ORM</code>, <code>HyperNET</code>, <code>API</code> also come with the conductor bundled for Windows (the plain <code>.Embedded</code> packages above) and for Linux and macOS (the packages below), so an app works with no internet and nothing to install on all three. Each package holds one operating system and processor (so none is bigger than the Windows ones), and the same three Holochain choices:</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -590,7 +590,7 @@ so a package cannot be forgotten.</p>
       <a href="#packages">Packages</a>
       <a href="#the-libraries">The libraries</a>
       <a href="#the-four-packages-for-each-library">The four packages for each library</a>
-      <a href="#offline-packages-for-linux-and-macos">Offline packages for Linux and macOS</a>
+      <a href="#offline-packages-for-windows-linux-and-macos">Offline packages for Windows, Linux and macOS</a>
       <a href="#all-packages">All packages</a>
       <a href="#project-templates">Project templates</a>
       <a href="#which-one-do-i-want">Which one do I want?</a>
